@@ -1,11 +1,9 @@
-
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
+class GetApi extends Component {
 
-class Electronics extends Component {
-
-	constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {products: []};
     }    
@@ -20,25 +18,17 @@ class Electronics extends Component {
                     })
                 });
     }
+
+    componentWillUnmount = () => {
+        this.serverRequest.abort();
+    }
     render(){
-    	return (
-    	
-    	<div>
-    	{this.state.products.map(product => {
-    		return(
-	    		<p> {
-	    			product.name
-	    		}
-	    		
-	    		</p>
-			)    		
-    	})
+        return(
+            <ProductList list={this.state.products} />
+            )
+            
     }
-    	</div>
-    	
 
-    	)
-    }
-}
+};
 
-export default Electronics;
+export default GetApi;
